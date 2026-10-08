@@ -1,10 +1,15 @@
-const welcomeScreen=document.getElementById('welcomeScreen');
-const mainContent=document.getElementById('mainContent');
-
-function enterPortfolio(){welcomeScreen.style.display='none';mainContent.style.display='block';}
-welcomeScreen.addEventListener('click',enterPortfolio);
-setTimeout(enterPortfolio,3000);
-
-// Fade-in sections on scroll
-const sections=document.querySelectorAll('section');
-window.addEventListener('scroll',()=>{const triggerBottom=window.innerHeight*0.85;sections.forEach(section=>{if(section.getBoundingClientRect().top<triggerBottom)section.classList.add('visible');});});
+const toggle = document.querySelector('.menu-toggle');
+const links = document.querySelector('.nav-links');
+toggle.addEventListener('click', () => {
+  const open = links.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', String(open));
+  toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  toggle.textContent = open ? '✕' : '☰';
+});
+links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+  links.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-label', 'Open navigation');
+  toggle.textContent = '☰';
+}));
+document.getElementById('year').textContent = new Date().getFullYear();
